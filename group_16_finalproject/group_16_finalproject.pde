@@ -1,12 +1,16 @@
 // A portion of this project was inspired by code found on the OpenProcessing website. 
 // "Guitar Hero/Osu! mania infinite mode" by Jeppe Brown Richardson
 
-
-import processing.sound.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
 
 PImage jingleBells;
-SoundFile jingleBellsAudio;
-SoundFile error;
+Minim minim;
+AudioPlayer jingleBellsAudio;
 
 PImage dKey;
 PImage fKey;
@@ -25,12 +29,12 @@ int[] nums;
 void setup() {
   size(700, 950);
   
-  jingleBells = loadImage("jingleBells.jpg");
+  minim = new Minim(this);
   
-  jingleBellsAudio = new SoundFile(this, "jingleBellsAudio.mp3");
+  jingleBells = loadImage("jingleBells.jpg");
+  jingleBellsAudio = minim.loadFile("jingleBellsAudio.mp3");
   jingleBellsAudio.play();
   
-  error = new SoundFile(this, "error.mp3");
   
   dKey = loadImage("dKey.png");
   fKey = loadImage("fKey.png");
