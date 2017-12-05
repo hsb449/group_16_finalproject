@@ -1,5 +1,6 @@
 // A portion of this project was inspired by code found on the OpenProcessing website. 
 // "Guitar Hero/Osu! mania infinite mode" by Jeppe Brown Richardson
+//main page ornament image from http://ournerdhome.com/8-bit-holiday-ornaments/
 
 // 0: Initial Screen
 // 1: Game Screen
