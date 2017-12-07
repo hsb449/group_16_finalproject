@@ -1,5 +1,6 @@
 class Notes {
   PVector location;
+  int fallRate;
   
   Notes(int i) {
     location = new PVector(i, 0);
@@ -22,7 +23,7 @@ class Notes {
   }
   
   void fall() {
-    location.y += 5;
+    location.y += fallRate;
   }
   
   void run() {

@@ -3,6 +3,7 @@ PImage img;
 
 class Button {
   int xpos, ypos, widthval, heightval;
+  String songText, difficultyText;
 
   Button(int x, int y, int w, int h) {
     xpos = x;
@@ -31,7 +32,7 @@ class NewGame extends Button {
     fill(255);
     textSize(30);
     //textFont("Arial", 40);
-    text("Click to" + "\n" + "start", xpos, ypos - 5);
+    text(songText + "\n" + difficultyText, xpos, ypos - 5);
   }
 }
 
