@@ -15,9 +15,11 @@ import ddf.minim.signals.*;
 import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 
-PImage jingleBells;
+int frameDiv;
+
+PImage songImage;
 Minim minim;
-AudioPlayer jingleBellsAudio;
+AudioPlayer Audio;
 
 PImage dKey;
 PImage fKey;
@@ -32,6 +34,8 @@ PImage kKey1;
 ArrayList noteList = new ArrayList();
 int[] nums;
 
+int fallRate2;
+
 //Game screen initialization
 int gameScreen = 0;
 PImage ornament;
@@ -39,17 +43,14 @@ PFont holFont;
 
 //Button initializations
 NewGame newGame;
+NewGame newGame2;
+NewGame newGame3;
 
 
 void setup() {
   size(700, 950);
   
   minim = new Minim(this);
-  
-  jingleBells = loadImage("jingleBells.jpg");
-  jingleBellsAudio = minim.loadFile("jingleBellsAudio.mp3");
-  //jingleBellsAudio.play();
-  
   
   dKey = loadImage("dKey.png");
   fKey = loadImage("fKey.png");
@@ -76,6 +77,16 @@ void setup() {
   
   // Create new game button
   newGame = new NewGame(465, 175, 150, 150, 50);
+  newGame.songText = "Jingle Bells";
+  newGame.difficultyText = "[[Hard]]";
+  
+  newGame2 = new NewGame(217, 348, 160, 160, 50);
+  newGame2.songText = "Sleigh Ride";
+  newGame2.difficultyText = "[[Medium]]";
+  
+  newGame3 = new NewGame(420, 620, 145, 145, 50);
+  newGame3.songText = "Frosty the Snowman";
+  newGame3.difficultyText = "[[Easy]]";
   
   //216, 354
   //424, 611
@@ -86,12 +97,20 @@ void draw() {
   if (gameScreen == 0) {
     initScreen();
     newGame.display();
+    newGame2.display();
+    newGame3.display();
     //println(mouseX + ", " + mouseY);
-  } else if (gameScreen == 1) {
+  } if (gameScreen == 1) {
     gameScreen();
-    //pause.display();
     
-    //condition for game over
+  }
+ if (gameScreen == 2) {
+    gameScreen();
+    
+  }
+ if (gameScreen == 3) {
+    gameScreen();
+    
   }
   
 }
@@ -108,9 +127,9 @@ void initScreen() {
 // GAME PLAY SCREEN
 void gameScreen() {
   
-  background(jingleBells);
+  background(songImage);
   
-  jingleBellsAudio.play();
+  Audio.play();
   
   image(dKey, 25, 800);
   image(fKey, 200, 800);
@@ -119,8 +138,9 @@ void gameScreen() {
   
   int index = (int) random(0, 4);
   Notes note = new Notes(nums[index]);
+  note.fallRate = fallRate2;
   
-  if (frameCount % 45 == 0) {
+  if (frameCount % frameDiv == 0) {
     noteList.add(note);
   }
   
@@ -148,6 +168,24 @@ void gameScreen() {
 void mousePressed() {
   if (overButton(465, 175, 150)) {
     gameScreen = 1;
+    songImage = loadImage("jingleBells.jpg");
+    Audio = minim.loadFile("jingleBellsAudio.mp3");
+    frameDiv = 15;
+    fallRate2 = 15;
+  }
+  if (overButton(217, 348, 160)) {
+    gameScreen = 2;
+    songImage = loadImage("sleighRide.jpg");
+    Audio = minim.loadFile("sleighRide.mp3");
+    frameDiv = 20;
+    fallRate2 = 12;
+  }
+  if (overButton(420, 620, 145)) {
+    gameScreen = 3;
+    songImage = loadImage("frostyTheSnowman.jpg");
+    Audio = minim.loadFile("frostyTheSnowman.mp3");
+    frameDiv = 30;
+    fallRate2 = 10;
   }
   
   //if (overButton(350, 495, 150, 50)) {
