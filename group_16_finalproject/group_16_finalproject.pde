@@ -7,7 +7,6 @@
 // 2: Game Over Screen
 // 3: How to play
 
-
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -40,6 +39,8 @@ int fallRate2;
 int gameScreen = 0;
 PImage ornament;
 PFont holFont;
+PImage santa;
+PImage reindeer;
 
 //Button initializations
 NewGame newGame;
@@ -69,11 +70,19 @@ void setup() {
   nums[2] = 375;
   nums[3] = 550;
 
+  santa = loadImage("santa.png");
+  santa.resize(32, 10);
+  reindeer = loadImage("reindeer.png");
+  reindeer.resize(40, 40);
+  //image(reindeer, 100, 100);
   ornament = loadImage("ornament.jpg");
   //zigBlack = createFont("Ziggurat-Black", 40);
   //textFont(zigBlack);
   holFont = createFont("candy.ttf", 80);
   //textFont(holFont);
+  //scale(0.01, 0.01);
+  
+  
   
   // Create new game button
   newGame = new NewGame(465, 175, 150, 150, 50);
@@ -94,6 +103,12 @@ void setup() {
 }
 
 void draw() {
+  background(0);
+  cursor(santa);
+  //cursor(reindeer);
+  //image(reindeer, mouseX + 10, mouseY + 10);
+  //image(reindeer, 100, 100);
+  
   if (gameScreen == 0) {
     initScreen();
     newGame.display();
@@ -118,6 +133,7 @@ void draw() {
 // INITIAL SCREEN
 void initScreen() {
   image(ornament, 0, 0, width, height);
+  image(reindeer, mouseX + 50, mouseY);
   textAlign(CENTER);
   textSize(80);
   textFont(holFont);
