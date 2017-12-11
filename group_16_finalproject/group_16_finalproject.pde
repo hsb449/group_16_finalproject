@@ -134,6 +134,7 @@ void draw() {
 void initScreen() {
   image(ornament, 0, 0, width, height);
   image(reindeer, mouseX + 50, mouseY);
+  rotate(PI/100);
   textAlign(CENTER);
   textSize(80);
   textFont(holFont);
