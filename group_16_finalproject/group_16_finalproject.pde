@@ -16,6 +16,8 @@ import ddf.minim.ugens.*;
 
 boolean isMute = false;
 
+boolean hello;
+
 int frameDiv;
 int s1,s2,s3,s4;
 
