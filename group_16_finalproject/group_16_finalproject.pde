@@ -14,11 +14,15 @@ import ddf.minim.signals.*;
 import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 
+
 int frameDiv;
+int s1,s2,s3,s4;
 
 PImage songImage;
+PImage present;
 Minim minim;
 AudioPlayer Audio;
+AudioPlayer sound;
 
 PImage dKey;
 PImage fKey;
@@ -46,12 +50,22 @@ PImage reindeer;
 NewGame newGame;
 NewGame newGame2;
 NewGame newGame3;
+NewGame endGame;
+NewGame restart;
+
+int max;
+int score;
 
 
 void setup() {
   size(700, 950);
   
+  String[] k=loadStrings("max.txt");
+  max=int(k[0]);
+  
   minim = new Minim(this);
+  
+  sound= minim.loadFile("error.mp3");
   
   dKey = loadImage("dKey.png");
   fKey = loadImage("fKey.png");
@@ -63,6 +77,11 @@ void setup() {
   jKey1 = loadImage("jKey1.png");
   kKey1 = loadImage("kKey1.png");
   
+  s1=130;
+  s2=130;
+  s3=130;
+  s4=130;
+  
   nums = new int[4];
   
   nums[0] = 25;
@@ -70,6 +89,7 @@ void setup() {
   nums[2] = 375;
   nums[3] = 550;
 
+  present=loadImage("presents.jpg");
   santa = loadImage("santa.png");
   santa.resize(32, 10);
   reindeer = loadImage("reindeer.png");
@@ -97,6 +117,13 @@ void setup() {
   newGame3.songText = "Frosty the Snowman";
   newGame3.difficultyText = "[[Easy]]";
   
+  endGame=new NewGame(600,100,150,150,50);
+  endGame.songText="End Game";
+  endGame.difficultyText = "";
+  
+  restart=new NewGame(250,700,200,200,30);
+  restart.songText="Try Again";
+  restart.difficultyText = "";
   //216, 354
   //424, 611
   //177, 788
@@ -117,17 +144,30 @@ void draw() {
     //println(mouseX + ", " + mouseY);
   } if (gameScreen == 1) {
     gameScreen();
+    if (Audio.isPlaying()==false){
+      gameScreen=4;
+    }
     
   }
  if (gameScreen == 2) {
     gameScreen();
+    if (Audio.isPlaying()==false){
+      gameScreen=4;
+    }
     
   }
  if (gameScreen == 3) {
     gameScreen();
+    if (Audio.isPlaying()==false){
+      gameScreen=4;
+    }
     
   }
+ if (gameScreen==4){
+   overScreen();
+ }
   
+
 }
 
 // INITIAL SCREEN
@@ -139,23 +179,68 @@ void initScreen() {
   textSize(80);
   textFont(holFont);
   text("Keyboard DDR", width/2, height/2 + 35);
+  score=0;
+}
+
+void overScreen(){
+  image(present, 0, 0);
+  restart.display();
+  textSize(50);
+  text("Game Over!",150,300);
+  text("score:"+score,100,400);
+  text("highest score:"+max,200,500);
+  if (score>=max){
+    text("New Record",350,200);
+    max=score;
+    String[] l=new String[1];
+    l[0]=str(max);
+    saveStrings("max.txt",l);
+  }
 }
 
 // GAME PLAY SCREEN
 void gameScreen() {
   
+  dKey = loadImage("dKey.png");
+  fKey = loadImage("fKey.png");
+  jKey = loadImage("jKey.png");
+  kKey = loadImage("kKey.png");
+   
   background(songImage);
   
   Audio.play();
+  
+
+  dKey.resize(s1,s1);
+  fKey.resize(s2,s2);
+  jKey.resize(s3,s3);
+  kKey.resize(s4,s4);
+  
+  if (s1>130){
+    s1-=1;
+  }
+  if (s2>130){
+    s2-=1;
+  }
+  if (s3>130){
+    s3-=1;
+  }
+  if (s4>130){
+    s4-=1;
+  }
   
   image(dKey, 25, 800);
   image(fKey, 200, 800);
   image(jKey, 375, 800);
   image(kKey, 550, 800);
-  
   int index = (int) random(0, 4);
   Notes note = new Notes(nums[index]);
   note.fallRate = fallRate2;
+  
+  textSize(80);
+  text("score:"+score,150,50);
+  
+  endGame.display();
   
   if (frameCount % frameDiv == 0) {
     noteList.add(note);
@@ -166,15 +251,23 @@ void gameScreen() {
     no.run();
     if (key == 'd' && no.location.y >= 775 && no.location.y <= 825 && no.location.x == 25 && keyPressed) {
       noteList.remove(h);
+      score+=1;
+      sound.play();
     }
     if (key == 'f' && no.location.y >= 775 && no.location.y <= 825 && no.location.x == 200 && keyPressed) {
       noteList.remove(h);
+      score+=1;
+      sound.play();
     }
     if (key == 'j' && no.location.y >= 775 && no.location.y <= 825 && no.location.x == 375 && keyPressed) {
       noteList.remove(h);
+      score+=1;
+      sound.play();
     }
     if (key == 'k' && no.location.y >= 775 && no.location.y <= 825 && no.location.x == 550 && keyPressed) {
       noteList.remove(h);
+      score+=1;
+      sound.play();
     }
   }
   
@@ -182,7 +275,23 @@ void gameScreen() {
 }
 
 
+void keyPressed(){
+ if (key=='d'){
+   s1=140;
+ }
+ if (key=='f'){
+   s2=140;
+ }
+ if (key=='j'){
+   s3=140;
+ }
+ if (key=='k'){
+   s4=140;
+ }
+}
+    
 void mousePressed() {
+  if (gameScreen==0){
   if (overButton(465, 175, 150)) {
     gameScreen = 1;
     songImage = loadImage("jingleBells.jpg");
@@ -203,6 +312,14 @@ void mousePressed() {
     Audio = minim.loadFile("frostyTheSnowman.mp3");
     frameDiv = 30;
     fallRate2 = 10;
+  }
+  }
+  if (overButton(600,100,125)& gameScreen!=0){
+    Audio.pause();
+    gameScreen=4;
+  }
+  if (overButton(250,700,200)& gameScreen==4){
+    gameScreen=0;
   }
   
   //if (overButton(350, 495, 150, 50)) {
