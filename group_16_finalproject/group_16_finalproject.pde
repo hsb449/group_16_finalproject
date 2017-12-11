@@ -16,8 +16,6 @@ import ddf.minim.ugens.*;
 
 boolean isMute = false;
 
-boolean hello;
-
 int frameDiv;
 int s1,s2,s3,s4;
 
@@ -48,6 +46,8 @@ PImage ornament;
 PFont holFont;
 PImage santa;
 PImage reindeer;
+float ypos = mouseY;
+float theta = PI/4;
 
 //Button initializations
 NewGame newGame;
@@ -175,9 +175,11 @@ void draw() {
 
 // INITIAL SCREEN
 void initScreen() {
+  theta += PI/4;
   image(ornament, 0, 0, width, height);
-  image(reindeer, mouseX + 50, mouseY);
-  rotate(PI/100);
+  ypos = mouseY + 15*sin(theta);
+  image(reindeer, mouseX - 70, ypos);
+
   textAlign(CENTER);
   textSize(80);
   textFont(holFont);
