@@ -14,6 +14,7 @@ import ddf.minim.signals.*;
 import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 
+boolean isMute = false;
 
 int frameDiv;
 int s1,s2,s3,s4;
@@ -113,7 +114,7 @@ void setup() {
   newGame2.songText = "Sleigh Ride";
   newGame2.difficultyText = "[[Medium]]";
   
-  newGame3 = new NewGame(420, 620, 145, 145, 50);
+  newGame3 = new NewGame(440, 605, 145, 145, 50);
   newGame3.songText = "Frosty the Snowman";
   newGame3.difficultyText = "[[Easy]]";
   
@@ -179,6 +180,8 @@ void initScreen() {
   textSize(80);
   textFont(holFont);
   text("Keyboard DDR", width/2, height/2 + 35);
+  textSize(40);
+  text("Press m to mute", 550, 750);
   score=0;
 }
 
@@ -287,6 +290,12 @@ void keyPressed(){
  }
  if (key=='k'){
    s4=140;
+ }
+ if (key=='m'){
+   Audio.mute();
+ }
+ if (key=='n'){
+   Audio.unmute();
  }
 }
     
