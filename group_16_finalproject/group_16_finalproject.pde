@@ -23,7 +23,7 @@ PImage songImage;
 PImage present;
 Minim minim;
 AudioPlayer Audio;
-AudioPlayer sound;
+AudioPlayer youhit;
 
 PImage dKey;
 PImage fKey;
@@ -68,7 +68,7 @@ void setup() {
   
   minim = new Minim(this);
   
-  sound= minim.loadFile("error.mp3");
+  youhit= minim.loadFile("error.mp3");
   
   dKey = loadImage("dKey.png");
   fKey = loadImage("fKey.png");
@@ -135,7 +135,7 @@ void setup() {
 void draw() {
   background(0);
   cursor(santa);
-  
+  //youhit= minim.loadFile("error.mp3");
   if (gameScreen == 0) {
     initScreen();
     newGame.display();
@@ -255,22 +255,26 @@ void gameScreen() {
     if (key == 'd' && no.location.y >= 775 && no.location.y <= 825 && no.location.x == 25 && keyPressed) {
       noteList.remove(h);
       score+=1;
-      sound.play();
+      youhit.rewind();
+      youhit.play();
     }
     if (key == 'f' && no.location.y >= 775 && no.location.y <= 825 && no.location.x == 200 && keyPressed) {
       noteList.remove(h);
       score+=1;
-      sound.play();
+      youhit.rewind();
+      youhit.play();
     }
     if (key == 'j' && no.location.y >= 775 && no.location.y <= 825 && no.location.x == 375 && keyPressed) {
       noteList.remove(h);
       score+=1;
-      sound.play();
+      youhit.rewind();
+      youhit.play();
     }
     if (key == 'k' && no.location.y >= 775 && no.location.y <= 825 && no.location.x == 550 && keyPressed) {
       noteList.remove(h);
       score+=1;
-      sound.play();
+      youhit.rewind();
+      youhit.play();
     }
   }
   
