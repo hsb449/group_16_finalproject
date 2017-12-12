@@ -112,11 +112,11 @@ void setup() {
   newGame.songText = "Jingle Bells";
   newGame.difficultyText = "[[Hard]]";
   
-  newGame2 = new NewGame(217, 348, 160, 160, 50);
+  newGame2 = new NewGame(217, 353, 160, 160, 50);
   newGame2.songText = "Sleigh Ride";
   newGame2.difficultyText = "[[Medium]]";
   
-  newGame3 = new NewGame(440, 605, 145, 145, 50);
+  newGame3 = new NewGame(424, 611, 145, 145, 50);
   newGame3.songText = "Frosty the Snowman";
   newGame3.difficultyText = "[[Easy]]";
   
@@ -135,16 +135,12 @@ void setup() {
 void draw() {
   background(0);
   cursor(santa);
-  //cursor(reindeer);
-  //image(reindeer, mouseX + 10, mouseY + 10);
-  //image(reindeer, 100, 100);
   
   if (gameScreen == 0) {
     initScreen();
     newGame.display();
     newGame2.display();
     newGame3.display();
-    //println(mouseX + ", " + mouseY);
   } if (gameScreen == 1) {
     gameScreen();
     if (Audio.isPlaying()==false){
@@ -185,7 +181,7 @@ void initScreen() {
   textFont(holFont);
   text("Keyboard DDR", width/2, height/2 + 35);
   textSize(40);
-  text("Press m to mute", 550, 750);
+  text("Press m to mute", 475, 830);
   score=0;
 }
 
