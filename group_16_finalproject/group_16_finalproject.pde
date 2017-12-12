@@ -193,8 +193,8 @@ void overScreen(){
   restart.display();
   textSize(50);
   text("Game Over!",150,300);
-  text("score:"+score,100,400);
-  text("highest score:"+max,200,500);
+  text("score:"+score,150,400);
+  text("highest score:"+max,250,500);
   if (score>=max){
     text("New Record",350,200);
     max=score;

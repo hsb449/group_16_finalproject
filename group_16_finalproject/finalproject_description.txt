@@ -1,0 +1,16 @@
+Keyboard DDR is a Guitar-Hero inspired keyboard game with a Christmas theme. Two classes
+were implemented, "Note" and "Button." The "Note" class is responsible for creating each
+pressable note for all of the songs. The "Button" class which also has an extension called
+"NewGame" is responsible for the clickable buttons that take you to each of the three songs.
+Each song has varying difficulty that is determined through the "Note" class. The minim
+sound library was used to implement sound. There are two GUI systems. The first one is the
+main menu and the second one is the game over menu that is activated once the song ends.
+The game over screen can also be activated in the middle of the song by clicking the
+appropriate button on the screen. The most difficult aspect of the game was the Santa
+cursor which implements two hierarchies of animation, the movement of Santa himself and
+the movement of the reindeer relative to Santa. Data input was fulfilled through the
+implementation of textures for the notes and image backgrounds.
+
+Het did the Note class, the implementation of the keyboard functionalities, and the
+sound functionalities. Lauren did the Button class, the main menu GUI, and the Santa 
+cursor. Jiiajun did the score functionality as well as the game over GUI.
