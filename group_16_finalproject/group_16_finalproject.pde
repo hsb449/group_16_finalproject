@@ -182,6 +182,7 @@ void initScreen() {
   text("Keyboard DDR", width/2, height/2 + 35);
   textSize(40);
   text("Press m to mute", 475, 830);
+  text("Press n to unmute", 475, 870);
   score=0;
 }
 
