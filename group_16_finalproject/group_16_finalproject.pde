@@ -178,9 +178,11 @@ void initScreen() {
 
   textAlign(CENTER);
   textSize(80);
+  fill(0, 255, 255);
   textFont(holFont);
   text("Keyboard DDR", width/2, height/2 + 35);
   textSize(40);
+  text("Hit DFJK as the steps" + "\n" + "reach the bottom" + "\n" + "of the screen", 220, 90);
   text("Press m to mute", 475, 830);
   text("Press n to unmute", 475, 870);
   score=0;
